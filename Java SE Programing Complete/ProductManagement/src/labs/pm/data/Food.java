@@ -23,11 +23,11 @@ import java.time.LocalDate;
  *
  * @author pedro
  */
-public class Food extends Product {
+public final class Food extends Product {
 
     private LocalDate bestBefore;
 
-    public Food(int id, String name, BigDecimal price, Rating rating, LocalDate bestBefore) {
+    Food(int id, String name, BigDecimal price, Rating rating, LocalDate bestBefore) {
         super(id, name, price, rating);
         this.bestBefore = bestBefore;
     }
@@ -49,6 +49,11 @@ public class Food extends Product {
     @Override
     public String toString() {
         return super.toString() + ", " + bestBefore;
+    }
+
+    @Override
+    public Product applyRating(Rating newRating) {
+        return new Food(getId(), getName(), getPrice(), newRating, bestBefore);
     }
 
 }
